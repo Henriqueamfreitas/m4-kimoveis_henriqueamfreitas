@@ -21,15 +21,10 @@ class RealEstate {
     @UpdateDateColumn()
     updatedAt: string;
 
-    // addressId NUMBER UNIQUE NOT NULL
-    //      Relacionamento 1 pra 1 com addresses
     @OneToOne(() => Address)
     @JoinColumn()
     address: Address;
 
-    // categoryId NUMBER NOT NULL
-    //      Relacionamento 1 pra n com categories
-    //      uma categoria pode conter muitos realEstates, mas um realEstate pode pertencer apenas uma categoria.
     @ManyToOne(() => Category)
     category: Category;
 }
