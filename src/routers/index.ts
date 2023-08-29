@@ -1,3 +1,4 @@
-import userRouter from "./user.router";
+import userRouters from "./user.routers";
+import loginRouters from "./login.routers";
 
-export { userRouter }
+export { userRouters, loginRouters }

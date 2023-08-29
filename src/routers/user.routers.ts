@@ -14,4 +14,4 @@ userRouter.post(
     userControllers.create
 )
 
-export default userRouter 
+export default { userRouter } 
