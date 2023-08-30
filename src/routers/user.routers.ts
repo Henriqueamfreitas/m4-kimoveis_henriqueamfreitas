@@ -22,11 +22,12 @@ userRouter.get(
     userControllers.get
 )
 
+userRouter.use("/:id", ensureIdExistsMiddleware)
+
 userRouter.delete(
     '/:id',
     token,
     ensureTokenIsAdminMiddleWare,
-    ensureIdExistsMiddleware,
     userControllers.destroy
 )
 

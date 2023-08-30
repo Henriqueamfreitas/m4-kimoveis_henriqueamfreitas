@@ -24,6 +24,7 @@ const ensureNoEmailDuplicatesMiddleWare = async (
 
 const ensureTokenIsAdminMiddleWare = ( req: Request, res: Response, next: NextFunction): void => {
     const { sub, admin } = res.locals.decoded
+    // console.log(admin)
     if(!admin){
         throw new AppError("Insufficient permission", 403)
     }
@@ -35,20 +36,17 @@ const ensureIdExistsMiddleware = async(
     req: Request, 
     res: Response, 
     next: NextFunction
-): Promise<Response | void> => {
+): Promise<void> => {
+    const id: number = Number(req.params.id)
+    
     const foundUser: User | null = await userRepo.findOneBy({
-        id: Number(req.params.id)
+        id
     }) 
     
     if(!foundUser) {
-        const error = new AppError("User not found", 404)
-        return next(error)
+        throw new AppError("User not found", 404)
     }
-    
-    if(foundUser?.deletedAt !== null){
-        const error = new AppError("User already deleted", 404)
-        return next(error)
-    }
+
     res.locals = {...res.locals, foundUser}
 
     return next()

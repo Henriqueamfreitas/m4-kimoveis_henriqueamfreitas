@@ -28,14 +28,14 @@ class User {
         }
     }
 
-    @CreateDateColumn()
-    createdAt: Date;
+    @CreateDateColumn({type: "date"})
+    createdAt: string;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+    @UpdateDateColumn({type: "date"})
+    updatedAt: string;
 
-    @DeleteDateColumn({ name: "deletedAt", nullable: true })
-    deletedAt: Date | null;
+    @DeleteDateColumn({ type: "date" })
+    deletedAt: string | null | Date;
 }
 
 export default User

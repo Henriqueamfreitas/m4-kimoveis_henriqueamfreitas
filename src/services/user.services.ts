@@ -18,6 +18,7 @@ const get = async (payload:any): Promise<User[]> => {
 
 const destroy = async (user: User): Promise<void> => {
     user.deletedAt = new Date()
+    
     await userRepo.save(user)
 };
   

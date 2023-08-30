@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { User } from "../entities"
 import { userServices } from "../services";
 import { hash, hashSync } from "bcryptjs";
+import { userSchemas } from "../schemas";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
     const userCreate: User = req.body 
@@ -23,23 +24,20 @@ const create = async (req: Request, res: Response): Promise<Response> => {
 const get = async (req: Request, res: Response): Promise<Response> => {
     const users: User[] = await userServices.get(req.query);
 
-    const usersWithoutPassword = users.map(user => {
-        const createdAt: Date = new Date(user.createdAt);
-        const updatedAt: Date = new Date(user.updatedAt);
+    // const usersWithNoPasswords1 = users.map((user) => {
+    //     const { password, ...userWithoutPassword } = user;
+    //     userWithoutPassword.createdAt = new Date(userWithoutPassword.createdAt);
+    //     userWithoutPassword.updatedAt = new Date(userWithoutPassword.updatedAt);
+    //     return userWithoutPassword;
+    // });
 
-        const userWithoutPassword = {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            admin: user.admin,
-            createdAt,
-            updatedAt,
-            deletedAt: user.deletedAt,
-        };
-        return userWithoutPassword;
-    })
+    const usersWithNoPasswords = users.map((user) => {
+        const userWithoutPassword = userSchemas.userReturnSchema.parse(user);
 
-    return res.status(200).json(usersWithoutPassword);
+        return userWithoutPassword
+    });
+
+    return res.status(200).json(usersWithNoPasswords);
 }
 
 const destroy = async (req: Request, res: Response): Promise<Response> => {

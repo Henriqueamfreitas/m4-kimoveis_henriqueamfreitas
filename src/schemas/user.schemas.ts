@@ -15,12 +15,12 @@ const userSchema = z.object({
     admin: z.boolean().default(false),
     createdAt: z.date(),
     updatedAt: z.date(),
-    deletedAt: z.date(),
+    deletedAt: z.date().nullable(),
 })
 
 const userCreateSchema = userSchema.omit({ id: true, createdAt: true, updatedAt: true, deletedAt: true })
 const userReturnSchema = userSchema.omit({ password: true })
-const userReturnManySchema = userSchema.array()
+const userReturnManySchema = userReturnSchema.array()
 const updateUserSchema = userSchema.partial()
 
-export default { userSchema, userCreateSchema }
+export default { userSchema, userCreateSchema, userReturnSchema, userReturnManySchema }
