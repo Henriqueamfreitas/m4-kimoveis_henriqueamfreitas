@@ -13,8 +13,8 @@ const userSchema = z.object({
     }),
     password: z.string().max(120),
     admin: z.boolean().default(false),
-    createdAt: z.date(),
-    updatedAt: z.date(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
     deletedAt: z.date().nullable(),
 })
 
