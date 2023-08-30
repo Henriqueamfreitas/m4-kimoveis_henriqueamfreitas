@@ -1,4 +1,4 @@
-import { compareSync } from "bcryptjs"
+import { compareSync, compare } from "bcryptjs"
 import { AppError } from "../errors/error"
 import { userRepo } from "../repositories"
 import { User } from "../entities"
@@ -8,17 +8,16 @@ const login = async (payload: any): Promise<any> => {
     const { email, password } = payload
 
     const user: User | null = await userRepo.findOne({ where: { email } })
-
-    if(user === null){
+    
+    if(!user){
         throw new AppError("Invalid credentials", 401)
     }
 
-    const passwordIsValid: boolean = compareSync(password, user.password) 
-
+    const passwordIsValid: boolean = await compare (password, user.password) 
+    
     if(!passwordIsValid){
         throw new AppError("Invalid credentials", 401)
     }
-
 
     const token = sign({
         email: user.email, admin: user.admin

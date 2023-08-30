@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { getRounds, hashSync } from 'bcryptjs'
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+
 
 @Entity('users') 
 class User {
@@ -17,11 +19,20 @@ class User {
     @Column({ type: 'varchar', length: 120 })
     password: string 
 
+    @BeforeInsert()
+    @BeforeUpdate()
+    hashedPassword(){
+        const password = getRounds(this.password)
+        if(!password){
+            this.password = hashSync(this.password, 10)
+        }
+    }
+
     @CreateDateColumn()
-    createdAt: string;
+    createdAt: Date;
 
     @UpdateDateColumn()
-    updatedAt: string;
+    updatedAt: Date;
 
     @DeleteDateColumn({ name: "deletedAt", nullable: true })
     deletedAt: Date | null;

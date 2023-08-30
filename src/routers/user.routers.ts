@@ -3,7 +3,8 @@ import "dotenv/config";
 import { userControllers } from "../controllers";
 import { userSchemas } from "../schemas";
 import { validateBodyMiddleware } from "../middlewares/validateBody.middleware";
-import { ensureNoEmailDuplicatesMiddleWare } from "../middlewares/verify.middlewares";
+import { ensureNoEmailDuplicatesMiddleWare, ensureTokenIsAdminMiddleWare, ensureIdExistsMiddleware } from "../middlewares/verify.middlewares";
+import { token } from "../middlewares/validateBody.middleware";
 
 const userRouter: Router = Router()
 
@@ -12,6 +13,29 @@ userRouter.post(
     validateBodyMiddleware(userSchemas.userCreateSchema),
     ensureNoEmailDuplicatesMiddleWare,
     userControllers.create
+)
+
+userRouter.get(
+    '',
+    token,
+    ensureTokenIsAdminMiddleWare,
+    userControllers.get
+)
+
+userRouter.delete(
+    '/:id',
+    token,
+    ensureTokenIsAdminMiddleWare,
+    ensureIdExistsMiddleware,
+    userControllers.destroy
+)
+
+userRouter.patch(
+    '/:id',
+    token,
+    ensureTokenIsAdminMiddleWare,
+    ensureIdExistsMiddleware,
+    userControllers.update
 )
 
 export default { userRouter } 

@@ -38,4 +38,4 @@ const token = (req: Request, res: Response, next: NextFunction): void => {
 }
 
 
-export { validateBodyMiddleware }
+export { validateBodyMiddleware, token }
