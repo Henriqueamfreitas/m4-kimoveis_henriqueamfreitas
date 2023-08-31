@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { User } from "../entities"
 import { userSchemas } from '../schemas';
-// import { movieCreateSchema } from '../schemas/movie.schema';
 import { DeepPartial, Repository } from 'typeorm';
 
 type UserCreate = z.infer<typeof userSchemas.userCreateSchema>;
