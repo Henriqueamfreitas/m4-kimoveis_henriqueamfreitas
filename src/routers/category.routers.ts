@@ -18,4 +18,9 @@ categoryRouter.post(
     categoryControllers.create    
 )
 
+categoryRouter.get(
+    '', 
+    categoryControllers.get
+)
+
 export default { categoryRouter }

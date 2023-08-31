@@ -13,7 +13,7 @@ const create = async (userData: User): Promise<any> => {
 }
 
 const get = async (payload:any): Promise<User[]> => {
-    const users: any = userRepo.find()
+    const users: Promise<User[]> = userRepo.find()
 
     return users
 }

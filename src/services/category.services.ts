@@ -9,5 +9,10 @@ const create = async (categoryData: Category): Promise<any> => {
     return save
 }
 
+const get = async (payload:any): Promise<Category[]> => {
+    const categories: Promise<Category[]> = categoryRepo.find()
 
-export default { create }
+    return categories
+}
+
+export default { create, get }

@@ -10,4 +10,10 @@ const create = async (req: Request, res: Response): Promise<Response> => {
     return res.status(201).json(newCategory)
 }
 
-export default { create }
+const get = async (req: Request, res: Response): Promise<Response> => {
+    const categories: Category[] = await categoryServices.get(req.query);
+
+    return res.status(200).json(categories);
+}
+
+export default { create, get }
