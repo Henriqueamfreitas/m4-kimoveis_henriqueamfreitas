@@ -1,3 +1,4 @@
-import userRepo from "./user.repository";
+import userRepo from "./user.repositories";
+import categoryRepo from "./category.repositories";
 
-export { userRepo }
+export { userRepo, categoryRepo }

@@ -1,8 +1,12 @@
-import { User } from "../entities";
+import { Category } from "../entities";
+import { categoryRepo } from "../repositories"
 
-const create = async (userData: User): Promise<any> => {
+const create = async (categoryData: Category): Promise<any> => {
+    const category: Category = categoryRepo.create(categoryData)
 
-    return 
+    const save = await categoryRepo.save(category)
+
+    return save
 }
 
 

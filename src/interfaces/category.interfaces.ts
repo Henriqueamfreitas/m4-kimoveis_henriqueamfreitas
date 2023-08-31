@@ -1,13 +1,12 @@
 import { z } from 'zod';
 import { Category } from "../entities"
-import { User } from "../entities"
-import { userSchemas } from '../schemas';
+import { categorySchemas } from '../schemas';
 import { DeepPartial, Repository } from 'typeorm';
 
-type categoryCreate = z.infer<typeof userSchemas.userCreateSchema>;
-type categoryRead = Array<Category>;
-type categoryUpdate = DeepPartial<Category>;
+type CategoryCreate = z.infer<typeof categorySchemas.categoryCreateSchema>;
+type CategoryRead = Array<Category>;
+type CategoryUpdate = DeepPartial<Category>;
 
-type categoryRepo = Repository<Category>
+type CategoryRepo = Repository<Category>
 
-export {}
+export { CategoryCreate, CategoryRepo }
