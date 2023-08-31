@@ -25,7 +25,6 @@ const destroy = async (user: User): Promise<void> => {
 };
   
 const update = async ( user: User, payload: UserUpdate): Promise<User> => {
-    // userSchemas.updateUserSchema.parse(payload)
     return await userRepo.save({ ...user, ...payload });
 };
 

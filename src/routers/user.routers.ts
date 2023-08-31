@@ -6,8 +6,7 @@ import { validateBodyMiddleware } from "../middlewares/validateBody.middleware";
 import { 
     ensureNoEmailDuplicatesMiddleWare, 
     ensureTokenIsAdminMiddleWare, 
-    ensureIdExistsMiddleware,
-    ensureUserDontUpdateAdminFieldMiddleWare
+    ensureIdExistsMiddleware
 } from "../middlewares/verify.middlewares";
 import { token } from "../middlewares/validateBody.middleware";
 
