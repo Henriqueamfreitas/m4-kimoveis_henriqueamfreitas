@@ -22,14 +22,21 @@ const ensureNoEmailDuplicatesMiddleWare = async (
     return next(); 
 }
 
-const ensureTokenIsAdminMiddleWare = ( req: Request, res: Response, next: NextFunction): void => {
-    const { sub, admin } = res.locals.decoded
-    // console.log(admin)
-    if(!admin){
-        throw new AppError("Insufficient permission", 403)
+const ensureTokenIsAdminMiddleWare = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+    ): Promise<void> => {
+    const { sub, admin } = res.locals.decoded;
+    const userIdFromToken = sub;
+    const userIdFromRequest = Number(req.params.id);
+    const adminField = req.body.admin
+    const userIdValidation = !admin && (Number(userIdFromToken) === userIdFromRequest)
+    if (admin || userIdValidation) {
+        return next();
+    } else {
+        throw new AppError("Insufficient permission", 403);
     }
-    
-    return next()
 }
 
 const ensureIdExistsMiddleware = async(    
@@ -52,4 +59,40 @@ const ensureIdExistsMiddleware = async(
     return next()
 }
 
-export { ensureNoEmailDuplicatesMiddleWare, ensureTokenIsAdminMiddleWare, ensureIdExistsMiddleware }
+const ensureUserDontUpdateAdminFieldMiddleWare = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+    ): Promise<void> => {
+    const { sub, admin } = res.locals.decoded;
+    const userIdFromToken = sub;
+    const userIdFromRequest = Number(req.params.id);
+    const adminField = req.body.admin
+    const userIdValidation = !admin && (Number(userIdFromToken) === userIdFromRequest)
+      
+    // const id: number = Number(req.params.id)
+    
+    // const foundUser: User | null = await userRepo.findOneBy({
+    //     id
+    // }) 
+
+    // const admin2 = foundUser?.admin
+    console.log("admin:", admin)
+    console.log("adminField:", adminField)
+    console.log("adminField !== undefined", adminField !== undefined)
+
+    if(adminField !== undefined && !admin){
+        throw new AppError("Insufficient permission", 403);
+    }
+    return next()
+}
+
+
+
+
+export { 
+    ensureNoEmailDuplicatesMiddleWare, 
+    ensureTokenIsAdminMiddleWare, 
+    ensureIdExistsMiddleware,
+    ensureUserDontUpdateAdminFieldMiddleWare
+}

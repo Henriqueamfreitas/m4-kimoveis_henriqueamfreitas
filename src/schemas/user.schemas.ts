@@ -21,6 +21,6 @@ const userSchema = z.object({
 const userCreateSchema = userSchema.omit({ id: true, createdAt: true, updatedAt: true, deletedAt: true })
 const userReturnSchema = userSchema.omit({ password: true })
 const userReturnManySchema = userReturnSchema.array()
-const updateUserSchema = userSchema.partial()
+const updateUserSchema = userSchema.omit({ admin: true }).partial()
 
-export default { userSchema, userCreateSchema, userReturnSchema, userReturnManySchema }
+export default { userSchema, userCreateSchema, userReturnSchema, userReturnManySchema, updateUserSchema }

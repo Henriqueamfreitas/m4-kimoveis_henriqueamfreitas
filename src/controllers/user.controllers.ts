@@ -3,6 +3,7 @@ import { User } from "../entities"
 import { userServices } from "../services";
 import { hash, hashSync } from "bcryptjs";
 import { userSchemas } from "../schemas";
+import { AppError } from "../errors/error";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
     const userCreate: User = req.body 
@@ -24,13 +25,6 @@ const create = async (req: Request, res: Response): Promise<Response> => {
 const get = async (req: Request, res: Response): Promise<Response> => {
     const users: User[] = await userServices.get(req.query);
 
-    // const usersWithNoPasswords1 = users.map((user) => {
-    //     const { password, ...userWithoutPassword } = user;
-    //     userWithoutPassword.createdAt = new Date(userWithoutPassword.createdAt);
-    //     userWithoutPassword.updatedAt = new Date(userWithoutPassword.updatedAt);
-    //     return userWithoutPassword;
-    // });
-
     const usersWithNoPasswords = users.map((user) => {
         const userWithoutPassword = userSchemas.userReturnSchema.parse(user);
 
@@ -46,16 +40,14 @@ const destroy = async (req: Request, res: Response): Promise<Response> => {
 };
   
   
-const update = async (
-req: Request,
-res: Response
-): Promise<Response> => {
+const update = async ( req: Request, res: Response): Promise<Response> => {
     const { foundUser } = res.locals;
     const { body } = req;
-  
     const user: User = await userServices.update(foundUser, body);
   
-    return res.status(200).json(user);
+    const userWithNoPasswords = userSchemas.userReturnSchema.parse(user);
+
+    return res.status(200).json(userWithNoPasswords);
 };
 
 export default { create, get, destroy, update }

@@ -3,7 +3,12 @@ import "dotenv/config";
 import { userControllers } from "../controllers";
 import { userSchemas } from "../schemas";
 import { validateBodyMiddleware } from "../middlewares/validateBody.middleware";
-import { ensureNoEmailDuplicatesMiddleWare, ensureTokenIsAdminMiddleWare, ensureIdExistsMiddleware } from "../middlewares/verify.middlewares";
+import { 
+    ensureNoEmailDuplicatesMiddleWare, 
+    ensureTokenIsAdminMiddleWare, 
+    ensureIdExistsMiddleware,
+    ensureUserDontUpdateAdminFieldMiddleWare
+} from "../middlewares/verify.middlewares";
 import { token } from "../middlewares/validateBody.middleware";
 
 const userRouter: Router = Router()
@@ -34,9 +39,9 @@ userRouter.delete(
 userRouter.patch(
     '/:id',
     token,
+    validateBodyMiddleware(userSchemas.updateUserSchema),
     ensureTokenIsAdminMiddleWare,
-    ensureIdExistsMiddleware,
     userControllers.update
 )
 
-export default { userRouter } 
+export default { userRouter }

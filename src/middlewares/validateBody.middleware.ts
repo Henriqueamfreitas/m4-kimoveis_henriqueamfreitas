@@ -30,7 +30,7 @@ const token = (req: Request, res: Response, next: NextFunction): void => {
         if(error){
             throw new AppError(error.message, 401)
         }
-
+        
         res.locals = { ...res.locals, decoded };
     })
     
