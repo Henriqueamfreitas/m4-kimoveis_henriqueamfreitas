@@ -11,6 +11,8 @@ app.use(express.json());
 app.use('/users', userRouters.userRouter)
 app.use('/login', loginRouters.loginRouter)
 app.use('/categories', categoryRouters.categoryRouter)
+// app.use('/realEstate')
+// app.use('/schedules')
 
 app.use(error)
 

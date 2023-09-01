@@ -1,5 +1,7 @@
 import {UserRepo} from "./user.interfaces";
 import { iToken } from "./login.interfaces";
-import { categoryCreate, categoryRepo } from "./category.interfaces";
+import { CategoryCreate, CategoryRepo } from "./category.interfaces";
+import { RealEstateRepo } from "./realEstate.interfaces";
+import { ScheduleRepo } from "./schedules.interfaces";
 
-export { UserRepo, iToken }
+export { UserRepo, iToken, CategoryCreate, CategoryRepo, RealEstateRepo, ScheduleRepo }

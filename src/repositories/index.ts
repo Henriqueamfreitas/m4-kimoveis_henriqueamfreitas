@@ -1,4 +1,6 @@
 import userRepo from "./user.repositories";
 import categoryRepo from "./category.repositories";
+import realEstateRepo from "./realEstate.repositories";
+import scheduleRepo from "./schedule.repositories";
 
-export { userRepo, categoryRepo }
+export { userRepo, categoryRepo, realEstateRepo, scheduleRepo }
