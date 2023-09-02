@@ -1,16 +1,21 @@
-import { User } from "../entities";
+import { RealEstate } from "../entities";
 import { AppError } from "../errors/error";
 import { UserUpdate } from "../interfaces/user.interfaces";
-import { userRepo } from "../repositories";
+import { realEstateRepo } from "../repositories";
 import { userSchemas } from "../schemas";
 
-const create = async (userData: User): Promise<any> => {
-    const user: User = userRepo.create(userData)
-
-    const save = await userRepo.save(user)
+const create = async (realEstateData: any): Promise<any> => {
+    const realEstate: any = realEstateRepo.create(realEstateData)
+    const save = await realEstateRepo.save(realEstate)
 
     return save
 }
 
+const get = async (payload:any): Promise<RealEstate[]> => {
+    const realEstate: Promise<RealEstate[]> = realEstateRepo.find()
+    console.log(await realEstate)
+    return realEstate
+}
 
-export default { create }
+
+export default { create, get }

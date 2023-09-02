@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
-import { User } from "../entities"
-import { userServices } from "../services";
+import { Schedule } from "../entities"
+import { scheduleServices } from "../services";
 import { hash, hashSync } from "bcryptjs";
 import { userSchemas } from "../schemas";
 import { AppError } from "../errors/error";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
-    const userCreate: User = req.body 
+    const scheduleCreate: Schedule = req.body 
     
-    const newUser = await userServices.create(userCreate)
+    const newSchedule = await scheduleServices.create(scheduleCreate)
     
-    return res.status(201).json(newUser)
+    return res.status(201).json(newSchedule)
 }
 
 export default { create }

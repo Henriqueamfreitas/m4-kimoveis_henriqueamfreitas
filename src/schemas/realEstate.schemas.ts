@@ -1,30 +1,31 @@
 import { z } from "zod"
 
-const adressSchema = z.object({
+const addressSchema = z.object({
     street: z.string().max(45),
     zipCode: z.string().max(8),
     number: z.number().positive().int(),
     city: z.string().max(20),
     state: z.string().max(2),
+    id: z.number().int()
 })
-
 
 const realEstateSchema = z.object({
     id: z.number().positive().int(),
+    size: z.number().int().positive(),
     value: z.number().min(0).refine((num) => {
-        // Validação personalizada para verificar se o número é decimal com precisão 12 e escala 2.
-        // Você pode ajustar essa validação de acordo com seus requisitos específicos.
         const decimalRegex = /^\d{1,10}(\.\d{1,2})?$/;
         return decimalRegex.test(num.toString());
     }).default(0),
-    adressSchema,
-    categoryId: z.number().positive().int(),
+    address: addressSchema,
+    categoryId: z.number().int(),
     sold: z.boolean().default(false),
     createdAt: z.string(),
     updatedAt: z.string(),
 });
 
-const realEstateCreateSchema = realEstateSchema.omit({ id: true })
+
+
+const realEstateCreateSchema = realEstateSchema.omit({ id: true, createdAt: true, updatedAt: true, sold: true })
 
 const realEstateReturnManySchema = realEstateSchema.array()
 

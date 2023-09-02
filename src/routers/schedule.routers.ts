@@ -1,6 +1,6 @@
 import { Router } from "express";
 import "dotenv/config";
-import { userControllers } from "../controllers";
+import { schedulesControllers } from "../controllers";
 import { userSchemas } from "../schemas";
 import { validateBodyMiddleware } from "../middlewares/validateBody.middleware";
 import { 
@@ -14,6 +14,7 @@ const scheduleRouter: Router = Router()
 
 scheduleRouter.post(
     '', 
+    schedulesControllers.create
 )
 
 
