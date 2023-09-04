@@ -1,17 +1,19 @@
-import { Router } from "express";
-import "dotenv/config";
-import { validateBodyMiddleware } from "../middlewares/validateBody.middleware";
-import { token } from "../middlewares/validateBody.middleware";
-import { categoryControllers } from "../controllers";
-import { ensureTokenIsAdminMiddleWare } from "../middlewares/verify.middlewares";
-import { ensureCategoryIdExistsMiddleWare, ensureNoCategoryDuplicatesMiddleWare } from "../middlewares/category.middlewares";
+import { Router } from "express"
+import "dotenv/config"
+import { token } from "../middlewares/validateBody.middleware"
+import { categoryControllers } from "../controllers"
+import { ensureTokenIsAdminMiddleWare } from "../middlewares/verify.middlewares"
+import { 
+    ensureCategoryIdExistsMiddleWare, 
+    ensureNoCategoryDuplicatesMiddleWare 
+} from "../middlewares/category.middlewares"
 
 
 
 const categoryRouter: Router = Router()
 
 categoryRouter.post(
-    '/',
+    "/",
     ensureNoCategoryDuplicatesMiddleWare,
     token,
     ensureTokenIsAdminMiddleWare,
@@ -19,12 +21,12 @@ categoryRouter.post(
 )
 
 categoryRouter.get(
-    '', 
+    "", 
     categoryControllers.get
 )
 
 categoryRouter.get(
-    '/:id/realEstate',
+    "/:id/realEstate",
     ensureCategoryIdExistsMiddleWare,
     categoryControllers.getRealEstatesFromCategory
 )

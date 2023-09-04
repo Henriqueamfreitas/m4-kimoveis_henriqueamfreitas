@@ -1,27 +1,22 @@
-import { Router } from "express";
-import "dotenv/config";
-import { schedulesControllers } from "../controllers";
-import { schedulesSchemas } from "../schemas";
-import { validateBodyMiddleware } from "../middlewares/validateBody.middleware";
-import { 
-    ensureNoEmailDuplicatesMiddleWare, 
-    ensureTokenIsAdminMiddleWare, 
-    ensureIdExistsMiddleware
-} from "../middlewares/verify.middlewares";
-import { token } from "../middlewares/validateBody.middleware";
-import { ensureRealEstateIdExistsMiddleware } from "../middlewares/realEstate.middlewares";
+import { Router } from "express"
+import "dotenv/config"
+import { schedulesControllers } from "../controllers"
+import { schedulesSchemas } from "../schemas"
+import { validateBodyMiddleware } from "../middlewares/validateBody.middleware"
+import { token } from "../middlewares/validateBody.middleware"
+import { ensureRealEstateIdExistsMiddleware } from "../middlewares/realEstate.middlewares"
 import { 
     ensureDateIsValidMiddleWare, 
     ensureNoSchedulesDuplicatesMiddleWare, 
     ensureUserHasOnlyOneSchedulePerTimeMiddleWare,
     ensureRealEstateParamsIdExistsMiddleware,
     ensureTokenAdminMiddleWare
-} from "../middlewares/schedule.middlewares";
+} from "../middlewares/schedule.middlewares"
 
 const scheduleRouter: Router = Router()
 
 scheduleRouter.post(
-    '', 
+    "", 
     token,
     validateBodyMiddleware(schedulesSchemas.scheduleCreateSchema),
     ensureRealEstateIdExistsMiddleware,
@@ -32,7 +27,7 @@ scheduleRouter.post(
 )
 
 scheduleRouter.get(
-    '/realEstate/:id', 
+    "/realEstate/:id", 
     token,
     ensureTokenAdminMiddleWare,
     ensureRealEstateParamsIdExistsMiddleware,

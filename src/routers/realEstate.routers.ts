@@ -1,20 +1,15 @@
-import { Router } from "express";
-import "dotenv/config";
-import { realEstateControllers } from "../controllers";
-import { realEstateSchemas } from "../schemas";
-import { validateBodyMiddleware } from "../middlewares/validateBody.middleware";
-import { 
-    ensureNoEmailDuplicatesMiddleWare, 
-    ensureTokenIsAdminMiddleWare, 
-    ensureIdExistsMiddleware
-} from "../middlewares/verify.middlewares";
-import { token } from "../middlewares/validateBody.middleware";
-import { ensureNoAddressesDuplicatesMiddleWare } from "../middlewares/realEstate.middlewares";
+import { Router } from "express"
+import "dotenv/config"
+import { realEstateControllers } from "../controllers"
+import { validateBodyMiddleware } from "../middlewares/validateBody.middleware"
+import { ensureTokenIsAdminMiddleWare } from "../middlewares/verify.middlewares"
+import { token } from "../middlewares/validateBody.middleware"
+import { ensureNoAddressesDuplicatesMiddleWare } from "../middlewares/realEstate.middlewares"
 
 const realEstateRouter: Router = Router()
 
 realEstateRouter.post(
-    '',
+    "",
     token,
     ensureTokenIsAdminMiddleWare,
     ensureNoAddressesDuplicatesMiddleWare,
@@ -23,7 +18,7 @@ realEstateRouter.post(
 )
 
 realEstateRouter.get(
-    '',
+    "",
     realEstateControllers.get
 )
 
