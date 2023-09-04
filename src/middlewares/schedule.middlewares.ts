@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express"
-import { Address, RealEstate, Schedule } from "../entities"
-import { addressRepo, realEstateRepo, scheduleRepo } from "../repositories"
+import { RealEstate, Schedule } from "../entities"
+import { realEstateRepo, scheduleRepo } from "../repositories"
 import { AppError } from "../errors/error"
 
 const ensureNoSchedulesDuplicatesMiddleWare = async (
@@ -20,9 +20,9 @@ const ensureNoSchedulesDuplicatesMiddleWare = async (
     }
 
 
-    res.locals = { ...res.locals, foundSchedule };
+    res.locals = { ...res.locals, foundSchedule }
 
-    return next(); 
+    return next() 
 }
 
 const ensureUserHasOnlyOneSchedulePerTimeMiddleWare = async (
@@ -30,8 +30,8 @@ const ensureUserHasOnlyOneSchedulePerTimeMiddleWare = async (
     res: Response, 
     next: NextFunction
 ): Promise<Response | void> => {
-    const { sub, admin } = res.locals.decoded;
-    const userIdFromToken = sub;
+    const { sub, admin } = res.locals.decoded
+    const userIdFromToken = sub
     const foundSchedule: Schedule | null = await scheduleRepo.findOne({
         where: {
             date: req.body.date,
@@ -43,9 +43,9 @@ const ensureUserHasOnlyOneSchedulePerTimeMiddleWare = async (
         throw new AppError("User schedule to this real estate at this date and time already exists", 409)
     }
 
-    res.locals = { ...res.locals, foundSchedule };
+    res.locals = { ...res.locals, foundSchedule }
 
-    return next(); 
+    return next() 
 }
 
 const ensureDateIsValidMiddleWare = async (
@@ -73,9 +73,8 @@ const ensureDateIsValidMiddleWare = async (
     if(day === "Saturday" ) {
         throw new AppError("Invalid date, work days are monday to friday", 400)
     }
-    // res.locals = { ...res.locals, foundSchedule };
 
-    return next(); 
+    return next() 
 }
 
 const ensureRealEstateParamsIdExistsMiddleware = async(    
@@ -94,7 +93,6 @@ const ensureRealEstateParamsIdExistsMiddleware = async(
     }
     
     return next()
-    // res.locals = {...res.locals, foundRealEstate}
 }
 
 const ensureTokenAdminMiddleWare = async (
@@ -102,23 +100,23 @@ const ensureTokenAdminMiddleWare = async (
     res: Response,
     next: NextFunction
   ): Promise<void> => {
-    const { sub, admin } = res.locals.decoded;
-    const userIdFromToken = sub;
-    const userIdFromRequest = Number(req.params.id);
+    const { sub, admin } = res.locals.decoded
+    const userIdFromToken = sub
+    const userIdFromRequest = Number(req.params.id)
   
-    // Verifique se o usuário é um administrador
+
     if (admin) {
-      return next();
+      return next()
     }
   
-    // Verifique se o ID do usuário do token corresponde ao ID da solicitação
+
     if (userIdFromToken === userIdFromRequest) {
-      return next();
+      return next()
     }
   
-    // Se nenhuma das condições acima for atendida, lance um erro de permissão insuficiente
-    throw new AppError("Insufficient permission", 403);
-  };
+
+    throw new AppError("Insufficient permission", 403)
+  }
 
 
 export { 

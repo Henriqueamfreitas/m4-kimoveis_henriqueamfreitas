@@ -18,12 +18,12 @@ const ensureNoAddressesDuplicatesMiddleWare = async (
 
     if (foundAddress) {
         const error = new AppError("Address already exists", 409)
-        return next(error);
+        return next(error)
     }
 
-    res.locals = { ...res.locals, foundAddress };
+    res.locals = { ...res.locals, foundAddress }
 
-    return next(); 
+    return next() 
 }
 
 const ensureRealEstateIdExistsMiddleware = async(    
@@ -46,4 +46,7 @@ const ensureRealEstateIdExistsMiddleware = async(
     return next()
 }
 
-export { ensureNoAddressesDuplicatesMiddleWare, ensureRealEstateIdExistsMiddleware }
+export { 
+    ensureNoAddressesDuplicatesMiddleWare, 
+    ensureRealEstateIdExistsMiddleware 
+}

@@ -14,12 +14,12 @@ const ensureNoEmailDuplicatesMiddleWare = async (
 
     if (foundUser) {
         const error = new AppError("Email already exists", 409)
-        return next(error);
+        return next(error)
     }
 
-    res.locals = { ...res.locals, foundUser };
+    res.locals = { ...res.locals, foundUser }
 
-    return next(); 
+    return next() 
 }
 
 const ensureTokenIsAdminMiddleWare = async (
@@ -27,15 +27,15 @@ const ensureTokenIsAdminMiddleWare = async (
     res: Response, 
     next: NextFunction
     ): Promise<void> => {
-    const { sub, admin } = res.locals.decoded;
-    const userIdFromToken = sub;
-    const userIdFromRequest = Number(req.params.id);
+    const { sub, admin } = res.locals.decoded
+    const userIdFromToken = sub
+    const userIdFromRequest = Number(req.params.id)
     const adminField = req.body.admin
     const userIdValidation = !admin && (Number(userIdFromToken) === userIdFromRequest)
     if (admin || userIdValidation) {
-        return next();
+        return next()
     } else {
-        throw new AppError("Insufficient permission", 403);
+        throw new AppError("Insufficient permission", 403)
     }
 }
 

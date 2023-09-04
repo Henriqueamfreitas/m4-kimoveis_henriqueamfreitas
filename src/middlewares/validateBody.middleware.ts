@@ -31,11 +31,14 @@ const token = (req: Request, res: Response, next: NextFunction): void => {
             throw new AppError(error.message, 401)
         }
         
-        res.locals = { ...res.locals, decoded };
+        res.locals = { ...res.locals, decoded }
     })
     
     return next()
 }
 
 
-export { validateBodyMiddleware, token }
+export { 
+    validateBodyMiddleware, 
+    token 
+}

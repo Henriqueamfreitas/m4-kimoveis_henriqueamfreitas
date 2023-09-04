@@ -14,12 +14,12 @@ const ensureNoCategoryDuplicatesMiddleWare = async (
 
     if (foundCategory) {
         const error = new AppError("Category already exists", 409)
-        return next(error);
+        return next(error)
     }
 
-    res.locals = { ...res.locals, foundCategory };
+    res.locals = { ...res.locals, foundCategory }
 
-    return next(); 
+    return next() 
 }
 
 const ensureCategoryIdExistsMiddleWare = async (
@@ -31,15 +31,14 @@ const ensureCategoryIdExistsMiddleWare = async (
         id: Number(req.params.id)
     })
 
-    console.log(foundCategory)
     if (!foundCategory) {
         const error = new AppError("Category not found", 404)
-        return next(error);
+        return next(error)
     }
 
-    res.locals = { ...res.locals, foundCategory };
+    res.locals = { ...res.locals, foundCategory }
 
-    return next(); 
+    return next() 
 }
 
 export { 
