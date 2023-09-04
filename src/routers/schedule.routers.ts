@@ -10,7 +10,12 @@ import {
 } from "../middlewares/verify.middlewares";
 import { token } from "../middlewares/validateBody.middleware";
 import { ensureRealEstateIdExistsMiddleware } from "../middlewares/realEstate.middlewares";
-import { ensureDateIsValidMiddleWare, ensureNoSchedulesDuplicatesMiddleWare, ensureUserHasOnlyOneSchedulePerTimeMiddleWare } from "../middlewares/schedule.middlewares";
+import { 
+    ensureDateIsValidMiddleWare, 
+    ensureNoSchedulesDuplicatesMiddleWare, 
+    ensureUserHasOnlyOneSchedulePerTimeMiddleWare,
+    ensureRealEstateParamsIdExistsMiddleware
+} from "../middlewares/schedule.middlewares";
 
 const scheduleRouter: Router = Router()
 
@@ -29,6 +34,7 @@ scheduleRouter.get(
     '/realEstate/:id', 
     token,
     ensureTokenIsAdminMiddleWare,
+    ensureRealEstateParamsIdExistsMiddleware,
     schedulesControllers.get
 )
 

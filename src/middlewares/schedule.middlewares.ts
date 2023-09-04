@@ -78,4 +78,30 @@ const ensureDateIsValidMiddleWare = async (
     return next(); 
 }
 
-export { ensureNoSchedulesDuplicatesMiddleWare, ensureUserHasOnlyOneSchedulePerTimeMiddleWare, ensureDateIsValidMiddleWare }
+const ensureRealEstateParamsIdExistsMiddleware = async(    
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+): Promise<void> => {
+    const id: number = Number(req.params.id)
+    
+    const foundRealEstate: RealEstate | null = await realEstateRepo.findOneBy({
+        id
+    }) 
+
+    if(!foundRealEstate) {
+        throw new AppError("RealEstate not found", 404)
+    }
+    
+    return next()
+    // res.locals = {...res.locals, foundRealEstate}
+
+}
+
+export { 
+    ensureNoSchedulesDuplicatesMiddleWare, 
+    ensureUserHasOnlyOneSchedulePerTimeMiddleWare, 
+    ensureDateIsValidMiddleWare, 
+    ensureRealEstateParamsIdExistsMiddleware
+}
+

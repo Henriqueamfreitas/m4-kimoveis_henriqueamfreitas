@@ -12,30 +12,33 @@ const create = async (scheduleData: Schedule): Promise<any> => {
     return save
 }
 
-const get = async (payload:any): Promise<any[]> => {
-    const realEstateId = payload.id
-    const foundRealEstate: any | null = await scheduleRepo.findOne({
-        where: {
-            realEstate: { id: realEstateId },
-        }
-    })
+const get = async (payload: any): Promise<any> => {
+    const realEstateId = payload.id;
+    
     const realEstate: Promise<RealEstate[]> = realEstateRepo.find({ 
+        where: { id: realEstateId }, 
         relations: {
             address: true, 
             category: true, 
+            schedules: true
         }
-    })
+    });
 
     const schedule: Promise<Schedule[]> = scheduleRepo.find({ 
+        where: { realEstate: { id: realEstateId } }, 
         relations: {
             user: true, 
-            realEstate: true 
         }
     })
 
-    console.log("schedule:", await schedule)
-    console.log("realEstate:", await realEstate)
-    return realEstate
+    const realEstateData = await realEstate;
+    const realEstateItem = realEstateData[0]; // Pegue o primeiro item da matriz
+
+    if (realEstateItem) {
+        realEstateItem.schedules = await schedule;
+    }
+
+    return realEstateItem;
 }
 
 export default { create, get }

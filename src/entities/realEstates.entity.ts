@@ -1,5 +1,5 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
-import { Address, Category } from "../entities"
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { Address, Category, Schedule } from "../entities"
 import { categoryRepo } from '../repositories'
 
 @Entity('realEstates') 
@@ -26,11 +26,11 @@ class RealEstate {
     @JoinColumn()
     address: Address;
 
-    // @ManyToOne(() => Course, (course) => course.students)
-    // course: Course;
-
     @ManyToOne(() => Category, (category) => category.realEstate)
     category: Category;
+
+    @OneToMany(() => Schedule, (schedules) => schedules.realEstate)
+    schedules: Schedule[];
 }
 
 export default RealEstate 
