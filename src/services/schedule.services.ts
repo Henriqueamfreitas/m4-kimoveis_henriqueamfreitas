@@ -12,4 +12,16 @@ const create = async (scheduleData: Schedule): Promise<any> => {
     return save
 }
 
-export default { create }
+const get = async (payload:any): Promise<any[]> => {
+    const realEstateId = payload.id
+    const foundRealEstate: any | null = await scheduleRepo.findOne({
+        where: {
+            realEstate: { id: realEstateId },
+        }
+    })
+    console.log(foundRealEstate)
+
+    return foundRealEstate
+}
+
+export default { create, get }

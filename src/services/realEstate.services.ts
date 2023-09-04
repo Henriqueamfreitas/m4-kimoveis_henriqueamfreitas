@@ -13,7 +13,7 @@ const create = async (realEstateData: any): Promise<any> => {
 
 const get = async (payload:any): Promise<RealEstate[]> => {
     const realEstate: Promise<RealEstate[]> = realEstateRepo.find()
-    console.log(await realEstate)
+    
     return realEstate
 }
 

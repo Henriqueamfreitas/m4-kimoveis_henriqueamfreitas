@@ -25,5 +25,12 @@ scheduleRouter.post(
     schedulesControllers.create
 )
 
+scheduleRouter.get(
+    '/realEstate/:id', 
+    token,
+    ensureTokenIsAdminMiddleWare,
+    schedulesControllers.get
+)
+
 
 export default { scheduleRouter }

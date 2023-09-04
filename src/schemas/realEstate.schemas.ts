@@ -1,4 +1,5 @@
 import { z } from "zod"
+import categorySchemas from "./category.schemas";
 
 const addressSchema = z.object({
     street: z.string().max(45),
@@ -17,7 +18,8 @@ const realEstateSchema = z.object({
         return decimalRegex.test(num.toString());
     }).default(0),
     address: addressSchema,
-    categoryId: z.number().int(),
+    categoryId: categorySchemas.categorySchema,
+    // categoryId: z.number().int(),
     sold: z.boolean().default(false),
     createdAt: z.string(),
     updatedAt: z.string(),
