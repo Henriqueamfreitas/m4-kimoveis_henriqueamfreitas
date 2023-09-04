@@ -1,8 +1,5 @@
-import { RealEstate, Schedule } from "../entities";
-import { AppError } from "../errors/error";
-import { UserUpdate } from "../interfaces/user.interfaces";
-import { realEstateRepo, scheduleRepo } from "../repositories";
-import { userSchemas } from "../schemas";
+import { RealEstate, Schedule } from "../entities"
+import { realEstateRepo, scheduleRepo } from "../repositories"
 
 const create = async (scheduleData: Schedule): Promise<any> => {
     const schedule: Schedule = scheduleRepo.create(scheduleData)
@@ -13,7 +10,7 @@ const create = async (scheduleData: Schedule): Promise<any> => {
 }
 
 const get = async (payload: any): Promise<any> => {
-    const realEstateId = payload.id;
+    const realEstateId = payload.id
     
     const realEstate: Promise<RealEstate[]> = realEstateRepo.find({ 
         where: { id: realEstateId }, 
@@ -22,7 +19,7 @@ const get = async (payload: any): Promise<any> => {
             category: true, 
             schedules: true
         }
-    });
+    })
 
     const schedule: Promise<Schedule[]> = scheduleRepo.find({ 
         where: { realEstate: { id: realEstateId } }, 
@@ -31,14 +28,14 @@ const get = async (payload: any): Promise<any> => {
         }
     })
 
-    const realEstateData = await realEstate;
-    const realEstateItem = realEstateData[0]; // Pegue o primeiro item da matriz
+    const realEstateData = await realEstate
+    const realEstateItem = realEstateData[0] 
 
     if (realEstateItem) {
-        realEstateItem.schedules = await schedule;
+        realEstateItem.schedules = await schedule
     }
 
-    return realEstateItem;
+    return realEstateItem
 }
 
 export default { create, get }

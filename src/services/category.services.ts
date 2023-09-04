@@ -1,7 +1,7 @@
-import { Category, RealEstate } from "../entities";
-import { categoryRepo, realEstateRepo } from "../repositories"
+import { Category } from "../entities"
+import { categoryRepo } from "../repositories"
 
-const create = async (categoryData: Category): Promise<any> => {
+const create = async (categoryData: Category): Promise<Category> => {
     const category: Category = categoryRepo.create(categoryData)
 
     const save = await categoryRepo.save(category)
@@ -15,7 +15,8 @@ const get = async (payload:any): Promise<Category[]> => {
     return categories
 }
 
-const getRealEstatesFromCategory = async (payload: any): Promise<any> => {
+const getRealEstatesFromCategory = async (payload: any): Promise<{ 
+  id: number; name: string; realEstate: any; }> => {
     const category: any = await categoryRepo.find({
       where: {
         id: payload.id,
@@ -23,7 +24,7 @@ const getRealEstatesFromCategory = async (payload: any): Promise<any> => {
       relations: {
         realEstate: true,
       },
-    });
+    })
   
     const result = {
       id: category[0].id, 
@@ -31,13 +32,7 @@ const getRealEstatesFromCategory = async (payload: any): Promise<any> => {
       realEstate: category[0].realEstate, 
     }
   
-    return result; 
-  };
+    return result
+}
   
-  
-  
-  
-  
-  
-
 export default { create, get, getRealEstatesFromCategory }

@@ -1,8 +1,6 @@
-import { User } from "../entities";
-import { AppError } from "../errors/error";
-import { UserUpdate } from "../interfaces/user.interfaces";
-import { userRepo } from "../repositories";
-import { userSchemas } from "../schemas";
+import { User } from "../entities"
+import { UserUpdate } from "../interfaces/user.interfaces"
+import { userRepo } from "../repositories"
 
 const create = async (userData: User): Promise<any> => {
     const user: User = userRepo.create(userData)

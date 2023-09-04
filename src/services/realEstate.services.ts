@@ -1,8 +1,5 @@
-import { RealEstate } from "../entities";
-import { AppError } from "../errors/error";
-import { UserUpdate } from "../interfaces/user.interfaces";
-import { realEstateRepo } from "../repositories";
-import { userSchemas } from "../schemas";
+import { RealEstate } from "../entities"
+import { realEstateRepo } from "../repositories"
 
 const create = async (realEstateData: any): Promise<any> => {
     const realEstate: any = realEstateRepo.create(realEstateData)
@@ -13,7 +10,6 @@ const create = async (realEstateData: any): Promise<any> => {
 
 const get = async (payload:any): Promise<RealEstate[]> => {
     const realEstate: Promise<RealEstate[]> = realEstateRepo.find({ relations: {address: true }})
-    // console.log(realEstate)
     
     return realEstate
 }

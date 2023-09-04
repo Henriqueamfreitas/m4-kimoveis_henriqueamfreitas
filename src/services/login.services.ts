@@ -1,4 +1,4 @@
-import { compareSync, compare } from "bcryptjs"
+import { compare } from "bcryptjs"
 import { AppError } from "../errors/error"
 import { userRepo } from "../repositories"
 import { User } from "../entities"
