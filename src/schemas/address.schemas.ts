@@ -11,6 +11,4 @@ const addressSchema = z.object({
 
 const addressCreateSchema = addressSchema.omit({ id: true })
 
-const addressReturnManySchema = addressSchema.array()
-
 export default { addressSchema, addressCreateSchema }

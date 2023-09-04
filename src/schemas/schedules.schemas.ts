@@ -9,8 +9,5 @@ const scheduleSchema = z.object({
 })
 
 const scheduleCreateSchema = scheduleSchema.omit({ id: true, userId: true })
-// const scheduleReturnSchema = scheduleSchema.omit({ password: true })
-// const scheduleReturnManySchema = scheduleReturnSchema.array()
-// const scheduleUserSchema = scheduleSchema.omit({ admin: true }).partial()
 
 export default { scheduleSchema, scheduleCreateSchema }

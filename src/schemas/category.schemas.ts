@@ -7,6 +7,4 @@ const categorySchema = z.object({
 
 const categoryCreateSchema = categorySchema.omit({ id: true })
 
-const categoryReturnManySchema = categorySchema.array()
-
 export default { categorySchema, categoryCreateSchema }
