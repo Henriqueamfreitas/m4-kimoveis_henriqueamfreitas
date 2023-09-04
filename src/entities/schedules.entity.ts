@@ -10,16 +10,12 @@ class Schedule {
     @Column({ type: 'date' })
     date: string 
 
-    @Column({ type: 'varchar', length: 45 })
+    @Column({ type: 'time' })
     hour: string 
 
-    // realEstateId NUMBER NOT NULL
-    //      um realEstate pode conter muitas schedules, mas uma schedule pode pertencer apenas um realEstate.
     @ManyToOne(() => RealEstate)
     realEstate: RealEstate
 
-    // userId NUMBER NOT NULL
-    //      um user pode conter muitas schedules, mas uma schedule pode pertencer apenas um user.
     @ManyToOne(() => User)
     user: User
 }

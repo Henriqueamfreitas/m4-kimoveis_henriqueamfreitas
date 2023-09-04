@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { Category } from "../entities"
-import { categoryServices } from "../services";
+import { Category, RealEstate } from "../entities"
+import { categoryServices, realEstateServices } from "../services";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
     const categoryCreate: Category = req.body 
@@ -15,5 +15,6 @@ const get = async (req: Request, res: Response): Promise<Response> => {
 
     return res.status(200).json(categories);
 }
+
 
 export default { create, get }

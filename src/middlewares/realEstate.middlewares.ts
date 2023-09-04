@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express"
-import { Address } from "../entities"
-import { addressRepo } from "../repositories"
+import { Address, RealEstate } from "../entities"
+import { addressRepo, realEstateRepo } from "../repositories"
 import { AppError } from "../errors/error"
 
 const ensureNoAddressesDuplicatesMiddleWare = async (
@@ -26,4 +26,24 @@ const ensureNoAddressesDuplicatesMiddleWare = async (
     return next(); 
 }
 
-export { ensureNoAddressesDuplicatesMiddleWare }
+const ensureRealEstateIdExistsMiddleware = async(    
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+): Promise<void> => {
+    const id: number = Number(req.body.realEstateId)
+    
+    const foundRealEstate: RealEstate | null = await realEstateRepo.findOneBy({
+        id
+    }) 
+    
+    if(!foundRealEstate) {
+        throw new AppError("RealEstate not found", 404)
+    }
+
+    res.locals = {...res.locals, foundRealEstate}
+
+    return next()
+}
+
+export { ensureNoAddressesDuplicatesMiddleWare, ensureRealEstateIdExistsMiddleware }

@@ -1,5 +1,5 @@
-import { Category } from "../entities";
-import { categoryRepo } from "../repositories"
+import { Category, RealEstate } from "../entities";
+import { categoryRepo, realEstateRepo } from "../repositories"
 
 const create = async (categoryData: Category): Promise<any> => {
     const category: Category = categoryRepo.create(categoryData)
@@ -15,4 +15,14 @@ const get = async (payload:any): Promise<Category[]> => {
     return categories
 }
 
-export default { create, get }
+const getRealEstatesFromCategory = async (payload:any): Promise<any> => {
+
+    const foundRealEstate: RealEstate | null = await realEstateRepo.findOneBy({
+        category: payload.params.id
+    })
+
+
+    return foundRealEstate
+}
+
+export default { create, get, getRealEstatesFromCategory }

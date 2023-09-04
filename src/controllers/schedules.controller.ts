@@ -10,7 +10,7 @@ const create = async (req: Request, res: Response): Promise<Response> => {
     
     const newSchedule = await scheduleServices.create(scheduleCreate)
     
-    return res.status(201).json(newSchedule)
+    return res.status(201).json({message: "Schedule created"})
 }
 
 export default { create }

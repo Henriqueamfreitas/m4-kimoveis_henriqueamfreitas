@@ -23,4 +23,8 @@ categoryRouter.get(
     categoryControllers.get
 )
 
+categoryRouter.get(
+    '/:id/realEstate'
+)
+
 export default { categoryRouter }
