@@ -12,7 +12,8 @@ const create = async (realEstateData: any): Promise<any> => {
 }
 
 const get = async (payload:any): Promise<RealEstate[]> => {
-    const realEstate: Promise<RealEstate[]> = realEstateRepo.find()
+    const realEstate: Promise<RealEstate[]> = realEstateRepo.find({ relations: {address: true }})
+    // console.log(realEstate)
     
     return realEstate
 }

@@ -18,17 +18,30 @@ const realEstateSchema = z.object({
         return decimalRegex.test(num.toString());
     }).default(0),
     address: addressSchema,
-    categoryId: categorySchemas.categorySchema,
-    // categoryId: z.number().int(),
+    // categoryId: categorySchemas.categorySchema,
+    categoryId: z.number().int(),
     sold: z.boolean().default(false),
     createdAt: z.string(),
     updatedAt: z.string(),
 });
 
+const realEstateSchema2 = z.object({
+    address: z.object({
+        street: z.string().max(45),
+        zipCode: z.string().max(8),
+        number: z.number().positive().int(),
+        city: z.string().max(20),
+        state: z.string().max(2),
+        id: z.number().int()
+    }),
+    size: z.number().min(0.1), // Definimos que "size" deve ser um número maior ou igual a 0.1.
+    categoryId: z.number().int(),
+    value: z.number(), // Definimos que "value" deve ser um número, mas não especificamos restrições adicionais neste exemplo.
+  });
 
 
 const realEstateCreateSchema = realEstateSchema.omit({ id: true, createdAt: true, updatedAt: true, sold: true })
 
 const realEstateReturnManySchema = realEstateSchema.array()
 
-export default { realEstateSchema, realEstateCreateSchema }
+export default { realEstateSchema, realEstateCreateSchema, realEstateSchema2 }

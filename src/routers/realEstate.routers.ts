@@ -15,10 +15,10 @@ const realEstateRouter: Router = Router()
 
 realEstateRouter.post(
     '',
-    // validateBodyMiddleware(realEstateSchemas.realEstateCreateSchema),
-    ensureNoAddressesDuplicatesMiddleWare,
     token,
     ensureTokenIsAdminMiddleWare,
+    ensureNoAddressesDuplicatesMiddleWare,
+    // validateBodyMiddleware(realEstateSchemas.realEstateSchema2),
     realEstateControllers.create
 )
 
