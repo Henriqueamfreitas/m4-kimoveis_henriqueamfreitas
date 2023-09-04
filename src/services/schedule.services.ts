@@ -1,7 +1,7 @@
-import { Schedule } from "../entities";
+import { RealEstate, Schedule } from "../entities";
 import { AppError } from "../errors/error";
 import { UserUpdate } from "../interfaces/user.interfaces";
-import { scheduleRepo } from "../repositories";
+import { realEstateRepo, scheduleRepo } from "../repositories";
 import { userSchemas } from "../schemas";
 
 const create = async (scheduleData: Schedule): Promise<any> => {
@@ -19,9 +19,23 @@ const get = async (payload:any): Promise<any[]> => {
             realEstate: { id: realEstateId },
         }
     })
-    console.log(foundRealEstate)
+    const realEstate: Promise<RealEstate[]> = realEstateRepo.find({ 
+        relations: {
+            address: true, 
+            category: true, 
+        }
+    })
 
-    return foundRealEstate
+    const schedule: Promise<Schedule[]> = scheduleRepo.find({ 
+        relations: {
+            user: true, 
+            realEstate: true 
+        }
+    })
+
+    console.log("schedule:", await schedule)
+    console.log("realEstate:", await realEstate)
+    return realEstate
 }
 
 export default { create, get }

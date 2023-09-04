@@ -4,7 +4,7 @@ import { validateBodyMiddleware } from "../middlewares/validateBody.middleware";
 import { token } from "../middlewares/validateBody.middleware";
 import { categoryControllers } from "../controllers";
 import { ensureTokenIsAdminMiddleWare } from "../middlewares/verify.middlewares";
-import { ensureNoCategoryDuplicatesMiddleWare } from "../middlewares/category.middlewares";
+import { ensureCategoryIdExistsMiddleWare, ensureNoCategoryDuplicatesMiddleWare } from "../middlewares/category.middlewares";
 
 
 
@@ -24,7 +24,8 @@ categoryRouter.get(
 )
 
 categoryRouter.get(
-    '/:id/realEstate'
+    '/:id/realEstate',
+    ensureCategoryIdExistsMiddleWare,
+    categoryControllers.getRealEstatesFromCategory
 )
-
 export default { categoryRouter }

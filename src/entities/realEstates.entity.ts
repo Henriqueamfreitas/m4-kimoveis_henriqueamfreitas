@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 import { Address, Category } from "../entities"
+import { categoryRepo } from '../repositories'
 
 @Entity('realEstates') 
 class RealEstate {
@@ -25,7 +26,10 @@ class RealEstate {
     @JoinColumn()
     address: Address;
 
-    @ManyToOne(() => Category)
+    // @ManyToOne(() => Course, (course) => course.students)
+    // course: Course;
+
+    @ManyToOne(() => Category, (category) => category.realEstate)
     category: Category;
 }
 

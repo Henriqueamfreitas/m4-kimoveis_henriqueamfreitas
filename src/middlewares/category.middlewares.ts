@@ -22,6 +22,27 @@ const ensureNoCategoryDuplicatesMiddleWare = async (
     return next(); 
 }
 
+const ensureCategoryIdExistsMiddleWare = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+): Promise<Response | void> => {
+    const foundCategory: Category | null = await categoryRepo.findOneBy({
+        id: Number(req.params.id)
+    })
+
+    console.log(foundCategory)
+    if (!foundCategory) {
+        const error = new AppError("Category not found", 404)
+        return next(error);
+    }
+
+    res.locals = { ...res.locals, foundCategory };
+
+    return next(); 
+}
+
 export { 
     ensureNoCategoryDuplicatesMiddleWare, 
+    ensureCategoryIdExistsMiddleWare
 }

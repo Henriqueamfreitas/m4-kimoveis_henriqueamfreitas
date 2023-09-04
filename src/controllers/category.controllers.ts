@@ -16,5 +16,10 @@ const get = async (req: Request, res: Response): Promise<Response> => {
     return res.status(200).json(categories);
 }
 
+const getRealEstatesFromCategory = async (req: Request, res: Response): Promise<Response> => {
+    const categories: Category = await categoryServices.getRealEstatesFromCategory(req.params);
 
-export default { create, get }
+    return res.status(200).json(categories);
+}
+
+export default { create, get, getRealEstatesFromCategory }

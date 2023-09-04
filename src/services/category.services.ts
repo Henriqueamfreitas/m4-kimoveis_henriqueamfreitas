@@ -15,14 +15,29 @@ const get = async (payload:any): Promise<Category[]> => {
     return categories
 }
 
-const getRealEstatesFromCategory = async (payload:any): Promise<any> => {
-
-    const foundRealEstate: RealEstate | null = await realEstateRepo.findOneBy({
-        category: payload.params.id
-    })
-
-
-    return foundRealEstate
-}
+const getRealEstatesFromCategory = async (payload: any): Promise<any> => {
+    const category: any = await categoryRepo.find({
+      where: {
+        id: payload.id,
+      },
+      relations: {
+        realEstate: true,
+      },
+    });
+  
+    const result = {
+      id: category[0].id, 
+      name: category[0].name, 
+      realEstate: category[0].realEstate, 
+    }
+  
+    return result; 
+  };
+  
+  
+  
+  
+  
+  
 
 export default { create, get, getRealEstatesFromCategory }
