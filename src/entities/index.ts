@@ -4,4 +4,10 @@ import Address from "./addresses.entity"
 import RealEstate from "./realEstates.entity"
 import Category from "./categories.entity"
 
-export { User, Schedule, Address, RealEstate, Category }
+export { 
+    User, 
+    Schedule, 
+    Address, 
+    RealEstate, 
+    Category 
+}

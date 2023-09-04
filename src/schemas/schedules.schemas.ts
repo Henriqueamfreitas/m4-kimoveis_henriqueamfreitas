@@ -10,4 +10,7 @@ const scheduleSchema = z.object({
 
 const scheduleCreateSchema = scheduleSchema.omit({ id: true, userId: true })
 
-export default { scheduleSchema, scheduleCreateSchema }
+export default { 
+    scheduleSchema, 
+    scheduleCreateSchema 
+}

@@ -1,22 +1,34 @@
-import { getRounds, hashSync } from 'bcryptjs'
-import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { 
+    getRounds, 
+    hashSync 
+} from "bcryptjs"
+import { 
+    BeforeInsert, 
+    BeforeUpdate, 
+    Column, 
+    CreateDateColumn, 
+    DeleteDateColumn, 
+    Entity, 
+    PrimaryGeneratedColumn, 
+    UpdateDateColumn 
+} from "typeorm"
 
 
-@Entity('users') 
+@Entity("users") 
 class User {
-    @PrimaryGeneratedColumn('increment')
+    @PrimaryGeneratedColumn("increment")
     id: number 
 
-    @Column({ type: 'varchar', length: 45 })
+    @Column({ type: "varchar", length: 45 })
     name: string 
 
-    @Column({ type: 'varchar', length: 45, unique: true })
+    @Column({ type: "varchar", length: 45, unique: true })
     email: string 
 
-    @Column({ type: 'boolean', default: false })
+    @Column({ type: "boolean", default: false })
     admin: boolean 
 
-    @Column({ type: 'varchar', length: 120 })
+    @Column({ type: "varchar", length: 120 })
     password: string 
 
     @BeforeInsert()

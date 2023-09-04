@@ -1,10 +1,13 @@
-import { Request, Response } from "express";
-import { Address, Category, RealEstate } from "../entities"
-import { realEstateServices } from "../services";
-import { hash, hashSync } from "bcryptjs";
-import { realEstateSchemas, userSchemas } from "../schemas";
-import { AppError } from "../errors/error";
-import { addressRepo, categoryRepo } from "../repositories";
+import { Category } from "../entities"
+import { 
+    Request, 
+    Response 
+} from "express"
+import { realEstateServices } from "../services"
+import { 
+    addressRepo, 
+    categoryRepo 
+} from "../repositories"
 
 const create = async (req: Request, res: Response): Promise<Response> => {
     const foundCategory: Category | null = await categoryRepo.findOneBy({
@@ -40,7 +43,10 @@ const create = async (req: Request, res: Response): Promise<Response> => {
 
 const get = async (req: Request, res: Response): Promise<any> => {
     const realEstate: any = await realEstateServices.get(req)
-    return res.status(200).json(realEstate);
+    return res.status(200).json(realEstate)
 }
 
-export default { create, get }
+export default { 
+    create, 
+    get 
+}

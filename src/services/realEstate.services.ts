@@ -15,4 +15,7 @@ const get = async (payload:any): Promise<RealEstate[]> => {
 }
 
 
-export default { create, get }
+export default { 
+    create, 
+    get 
+}

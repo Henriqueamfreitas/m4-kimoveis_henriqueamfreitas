@@ -26,4 +26,7 @@ const realEstateSchema = z.object({
 const realEstateCreateSchema = realEstateSchema.omit({ id: true, createdAt: true, updatedAt: true, sold: true })
 
 
-export default { realEstateSchema, realEstateCreateSchema }
+export default { 
+    realEstateSchema, 
+    realEstateCreateSchema 
+}

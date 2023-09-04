@@ -26,4 +26,9 @@ const update = async ( user: User, payload: UserUpdate): Promise<User> => {
     return await userRepo.save({ ...user, ...payload });
 };
 
-export default { create, get, destroy, update }
+export default { 
+    create, 
+    get, 
+    destroy, 
+    update 
+}

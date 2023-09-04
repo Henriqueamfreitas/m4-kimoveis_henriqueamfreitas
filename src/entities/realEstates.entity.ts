@@ -1,36 +1,45 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { 
+    Column, 
+    CreateDateColumn, 
+    Entity, 
+    JoinColumn, 
+    ManyToOne, 
+    OneToMany, 
+    OneToOne, 
+    PrimaryGeneratedColumn, 
+    UpdateDateColumn 
+} from "typeorm"
 import { Address, Category, Schedule } from "../entities"
-import { categoryRepo } from '../repositories'
 
-@Entity('realEstates') 
+@Entity("realEstates") 
 class RealEstate {
-    @PrimaryGeneratedColumn('increment')
+    @PrimaryGeneratedColumn("increment")
     id: number 
     
-    @Column({ type: 'boolean', default: false })
+    @Column({ type: "boolean", default: false })
     sold: boolean 
 
-    @Column({ type: 'numeric', default: 0 })
+    @Column({ type: "numeric", default: 0 })
     value: number | string
 
     @Column()
-    size: number;
+    size: number
 
     @CreateDateColumn({type: "date"})
-    createdAt: string;
+    createdAt: string
 
     @UpdateDateColumn({type: "date"})
-    updatedAt: string;
+    updatedAt: string
 
     @OneToOne(() => Address)
     @JoinColumn()
-    address: Address;
+    address: Address
 
     @ManyToOne(() => Category, (category) => category.realEstate)
-    category: Category;
+    category: Category
 
     @OneToMany(() => Schedule, (schedules) => schedules.realEstate)
-    schedules: Schedule[];
+    schedules: Schedule[]
 }
 
 export default RealEstate 

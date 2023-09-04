@@ -1,21 +1,26 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { Address, Category, RealEstate, User } from "../entities"
+import { 
+    Column, 
+    Entity, 
+    ManyToOne, 
+    PrimaryGeneratedColumn 
+} from "typeorm"
+import { 
+    RealEstate, 
+    User 
+} from "../entities"
 
 
-@Entity('schedules') 
+@Entity("schedules") 
 class Schedule {
-    @PrimaryGeneratedColumn('increment')
+    @PrimaryGeneratedColumn("increment")
     id: number 
     
-    @Column({ type: 'date' })
+    @Column({ type: "date" })
     date: string 
 
-    @Column({ type: 'time' })
+    @Column({ type: "time" })
     hour: string 
 
-
-    // @ManyToOne(() => Course, (course) => course.students)
-    // course: Course;
     @ManyToOne(() => RealEstate, (realEstate) => realEstate.schedules)
     realEstate: RealEstate
 

@@ -35,4 +35,8 @@ const getRealEstatesFromCategory = async (payload: any): Promise<{
     return result
 }
   
-export default { create, get, getRealEstatesFromCategory }
+export default { 
+  create, 
+  get, 
+  getRealEstatesFromCategory 
+}

@@ -1,6 +1,9 @@
-import { Request, Response } from "express";
-import { Category, RealEstate } from "../entities"
-import { categoryServices, realEstateServices } from "../services";
+import { Category } from "../entities"
+import { 
+    Request, 
+    Response 
+} from "express"
+import { categoryServices } from "../services"
 
 const create = async (req: Request, res: Response): Promise<Response> => {
     const categoryCreate: Category = req.body 
@@ -11,15 +14,19 @@ const create = async (req: Request, res: Response): Promise<Response> => {
 }
 
 const get = async (req: Request, res: Response): Promise<Response> => {
-    const categories: Category[] = await categoryServices.get(req.query);
+    const categories: Category[] = await categoryServices.get(req.query)
 
-    return res.status(200).json(categories);
+    return res.status(200).json(categories)
 }
 
 const getRealEstatesFromCategory = async (req: Request, res: Response): Promise<Response> => {
-    const categories: Category = await categoryServices.getRealEstatesFromCategory(req.params);
+    const categories: Category = await categoryServices.getRealEstatesFromCategory(req.params)
 
-    return res.status(200).json(categories);
+    return res.status(200).json(categories)
 }
 
-export default { create, get, getRealEstatesFromCategory }
+export default { 
+    create, 
+    get, 
+    getRealEstatesFromCategory 
+}

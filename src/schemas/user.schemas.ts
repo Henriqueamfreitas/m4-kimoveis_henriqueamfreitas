@@ -23,4 +23,10 @@ const userReturnSchema = userSchema.omit({ password: true })
 const userReturnManySchema = userReturnSchema.array()
 const updateUserSchema = userSchema.omit({ admin: true }).partial()
 
-export default { userSchema, userCreateSchema, userReturnSchema, userReturnManySchema, updateUserSchema }
+export default { 
+    userSchema, 
+    userCreateSchema, 
+    userReturnSchema, 
+    userReturnManySchema, 
+    updateUserSchema 
+}

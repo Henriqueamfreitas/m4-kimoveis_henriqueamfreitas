@@ -11,4 +11,7 @@ const addressSchema = z.object({
 
 const addressCreateSchema = addressSchema.omit({ id: true })
 
-export default { addressSchema, addressCreateSchema }
+export default { 
+    addressSchema, 
+    addressCreateSchema 
+}

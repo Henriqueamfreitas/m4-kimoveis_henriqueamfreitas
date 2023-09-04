@@ -38,4 +38,7 @@ const get = async (payload: any): Promise<any> => {
     return realEstateItem
 }
 
-export default { create, get }
+export default { 
+    create, 
+    get 
+}

@@ -7,4 +7,7 @@ const categorySchema = z.object({
 
 const categoryCreateSchema = categorySchema.omit({ id: true })
 
-export default { categorySchema, categoryCreateSchema }
+export default { 
+    categorySchema, 
+    categoryCreateSchema 
+}
