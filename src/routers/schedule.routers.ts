@@ -14,7 +14,8 @@ import {
     ensureDateIsValidMiddleWare, 
     ensureNoSchedulesDuplicatesMiddleWare, 
     ensureUserHasOnlyOneSchedulePerTimeMiddleWare,
-    ensureRealEstateParamsIdExistsMiddleware
+    ensureRealEstateParamsIdExistsMiddleware,
+    ensureTokenAdminMiddleWare
 } from "../middlewares/schedule.middlewares";
 
 const scheduleRouter: Router = Router()
@@ -33,7 +34,7 @@ scheduleRouter.post(
 scheduleRouter.get(
     '/realEstate/:id', 
     token,
-    ensureTokenIsAdminMiddleWare,
+    ensureTokenAdminMiddleWare,
     ensureRealEstateParamsIdExistsMiddleware,
     schedulesControllers.get
 )

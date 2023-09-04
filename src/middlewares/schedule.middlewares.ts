@@ -95,13 +95,37 @@ const ensureRealEstateParamsIdExistsMiddleware = async(
     
     return next()
     // res.locals = {...res.locals, foundRealEstate}
-
 }
+
+const ensureTokenAdminMiddleWare = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    const { sub, admin } = res.locals.decoded;
+    const userIdFromToken = sub;
+    const userIdFromRequest = Number(req.params.id);
+  
+    // Verifique se o usuário é um administrador
+    if (admin) {
+      return next();
+    }
+  
+    // Verifique se o ID do usuário do token corresponde ao ID da solicitação
+    if (userIdFromToken === userIdFromRequest) {
+      return next();
+    }
+  
+    // Se nenhuma das condições acima for atendida, lance um erro de permissão insuficiente
+    throw new AppError("Insufficient permission", 403);
+  };
+
 
 export { 
     ensureNoSchedulesDuplicatesMiddleWare, 
     ensureUserHasOnlyOneSchedulePerTimeMiddleWare, 
     ensureDateIsValidMiddleWare, 
-    ensureRealEstateParamsIdExistsMiddleware
+    ensureRealEstateParamsIdExistsMiddleware,
+    ensureTokenAdminMiddleWare
 }
 

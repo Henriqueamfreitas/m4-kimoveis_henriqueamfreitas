@@ -66,5 +66,5 @@ const ensureIdExistsMiddleware = async(
 export { 
     ensureNoEmailDuplicatesMiddleWare, 
     ensureTokenIsAdminMiddleWare, 
-    ensureIdExistsMiddleware,
+    ensureIdExistsMiddleware
 }
