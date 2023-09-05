@@ -5,6 +5,7 @@ import { validateBodyMiddleware } from "../middlewares/validateBody.middleware"
 import { ensureTokenIsAdminMiddleWare } from "../middlewares/verify.middlewares"
 import { token } from "../middlewares/validateBody.middleware"
 import { ensureNoAddressesDuplicatesMiddleWare } from "../middlewares/realEstate.middlewares"
+import { realEstateSchemas } from "../schemas"
 
 const realEstateRouter: Router = Router()
 
@@ -12,8 +13,8 @@ realEstateRouter.post(
     "",
     token,
     ensureTokenIsAdminMiddleWare,
+    validateBodyMiddleware(realEstateSchemas.realEstateCreateSchema),
     ensureNoAddressesDuplicatesMiddleWare,
-    // validateBodyMiddleware(realEstateSchemas.realEstateSchema2),
     realEstateControllers.create
 )
 
