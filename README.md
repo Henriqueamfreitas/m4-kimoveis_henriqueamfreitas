@@ -165,3 +165,6 @@ A sua empresa está te confiando esse desafio, portanto, dê o seu melhor no des
 
 - Rota deve listar todos os agendamentos de um imóvel.
 - A rota pode ser acessada apenas por administradores.
+
+
+**Tecnologias:** Typescript, Insomnia, postgresql, node, experess, typeORM
